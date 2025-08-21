@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ```markdown
 # 🤖 Help Every CS Freshman Have Your First AI！ (Windows only)
 
@@ -80,3 +81,7 @@ MIT © 2024-present — feel free to use, share & hack!
 - **License**: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
 - **Acknowledgment**: Images originally scraped from Google Images; dataset curated by Sourav Banerjee.
 ```
+=======
+# Animal-Classification-90
+90-class animal classifier with PyTorch
+>>>>>>> da713d4c5de2bb598c1341334dd0a1816f44f6a1
