@@ -1,26 +1,29 @@
-1. 💡 Additional Libraries
- • ⏱️  time  – not actively used, but typically imported for timing utilities.
- • 📊  torch.utils.tensorboard.SummaryWriter  – for logging metrics to TensorBoard.
- • 🛑 Custom module  early_stop.EarlyStopper  – implements patience-based early stopping.
- • 🔄  torch.optim.lr_scheduler.ReduceLROnPlateau  – automatic learning-rate reduction when validation accuracy plateaus.
-2. ✨ New Functionality Compared to the Basic Version
- • 🥇 Two data splits: separate training and validation sets ( train_ds ,  test_ds ) with different transforms.
- • 🎨 Augmentation: random horizontal flip, rotation, and color jitter for training images; only resize + ToTensor for validation.
- • 🧠 Transfer learning with selective fine-tuning:
- – Loads a pretrained ResNet-152 instead of ResNet-18.
- – Freezes the backbone, unfreezes  layer3 ,  layer4 , and the new classifier ( fc ) for fine-tuning.
- • 📈 Validation loop: computes accuracy on the validation set after each epoch.
- • 🛑 Early stopping: stops training if validation accuracy does not improve for 2 consecutive epochs.
- • 🔄 Learning-rate scheduling: halves the LR when validation accuracy plateaus for 1 epoch.
- • 📊 TensorBoard logging: records training loss, training accuracy, and validation accuracy after every epoch.
- • 🔢 Dynamic class count: infers  num_classes  from the training folder ( len(os.listdir(...)) ), so the code does not hard-code 2 classes.
- • 📆 Longer training: up to 10 epochs (vs. 5 in the basic script) unless early stopping triggers.
- • ⚖️ Weight decay (L2 regularization) of 1e-4 on the optimizer.
-3. ⚠️ Key Points / Caveats
- • 📁 Make sure the  early_stop  module and its  EarlyStopper  class are in the Python path.
- • 📂 Ensure the directory structure under  data/animals90  contains  train/  and  test/  sub-folders, each with class-named sub-directories.
- • 🚀 TensorBoard must be launched manually ( tensorboard --logdir runs/exp1 ) to visualize the metrics at  http://localhost:6006 .
- • 🖥️ Because only the last layers are fine-tuned, GPU memory usage is moderate, but ResNet-152 is still heavy—verify GPU availability.
+### Additional Libraries
+- ⏱️ `time` – not actively used, but typically imported for timing utilities.  
+- 📊 `torch.utils.tensorboard.SummaryWriter` – for logging metrics to TensorBoard.  
+- 🛑 Custom module `early_stop.EarlyStopper` – implements patience-based early stopping.  
+- 🔄 `torch.optim.lr_scheduler.ReduceLROnPlateau` – automatic learning-rate reduction when validation accuracy plateaus.
+
+### New Functionality Compared to the Basic Version
+- 🥇 **Two data splits**: separate training and validation sets (`train_ds`, `test_ds`) with different transforms.  
+- 🎨 **Augmentation**: random horizontal flip, rotation, and color jitter for training images; only resize + `ToTensor` for validation.  
+- 🧠 **Transfer learning with selective fine-tuning**:
+  - Loads a pretrained **ResNet-152** instead of ResNet-18.
+  - Freezes the backbone, unfreezes `layer3`, `layer4`, and the new classifier (`fc`) for fine-tuning.  
+- 📈 **Validation loop**: computes accuracy on the validation set after each epoch.  
+- 🛑 **Early stopping**: stops training if validation accuracy does not improve for **2 consecutive epochs**.  
+- 🔄 **Learning-rate scheduling**: halves the LR when validation accuracy plateaus for **1 epoch**.  
+- 📊 **TensorBoard logging**: records training loss, training accuracy, and validation accuracy after every epoch.  
+- 🔢 **Dynamic class count**: infers `num_classes` from the training folder (`len(os.listdir(...))`), so the code does not hard-code 2 classes.  
+- 📆 **Longer training**: up to **10 epochs** (vs. 5 in the basic script) unless early stopping triggers.  
+- ⚖️ **Weight decay (L2 regularization)** of **1e-4** on the optimizer.
+
+### Key Points / Caveats
+- 📁 Make sure the `early_stop` module and its `EarlyStopper` class are in the Python path.  
+- 📂 Ensure the directory structure under `data/animals90` contains `train/` and `test/` sub-folders, each with class-named sub-directories.  
+- 🚀 TensorBoard must be launched manually (`tensorboard --logdir runs/exp1`) to visualize the metrics at http://localhost:6006.  
+- 🖥️ Because only the last layers are fine-tuned, GPU memory usage is moderate, but **ResNet-152 is still heavy**—verify GPU availability.
+
 
 
 
